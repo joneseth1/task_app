@@ -1,0 +1,65 @@
+table{
+    background: #0033c0;
+    width: 500px;
+}
+
+    th {
+        color: white;
+        width: 125px;
+    }
+
+    td {
+        text-align: center;
+    }
+
+    .taskswrapper{
+        position: relative;
+        background: #0033c0;
+        width: 500px;
+        padding: 20px;
+    
+        margin: 0px 0px; 
+        font-size: 1em;
+        min-width: 300px;
+        box-shadow: 0 0 15px rgb(0, 0, 0.15);
+        border-radius: 10px/10px;
+    }
+
+    .button{
+        background: #F6F0ED;
+        border: 0;
+        color: black;
+        border-radius: 2px;
+        margin: 15px;
+        font-weight: 400;
+        border: 1px solid #2D2E2E;
+        transition: all .3s ease-out;
+        width: 100px;
+
+        padding: 10px;
+        background: white;
+        box-shadow: 0 0 5px rgb(0, 0, 0.15);
+        border-radius: 5px/5px; 
+    }
+
+    .button:hover {
+        cursor: pointer;
+        background: rgb(113, 109, 109);
+        color: white;
+    }
+
+    .tasktable {
+        color: white;
+        border: #2D2E2E;
+        border-style: solid;
+    }
+
+    .tabletitles {
+        border: #2D2E2E;
+        border-style: solid;
+    }
+
+    .infotext {
+    color: white;
+    }
+

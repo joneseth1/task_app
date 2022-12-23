@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+</head>
+    <body>
+        <div id="heading"><h1>Task App</h1></div>
+        <div class="navdiv">
+            <nav>
+                <a href="{{ url_for('index') }}"> Home</a> ||
+                <a href="{{ url_for('get_tasks') }}"> My Tasks</a> ||
+                <a href="{{ url_for('new_task') }}">Add Task</a> ||
+                {% if user %}
+                    <a href="{{ url_for('logout') }}">Logout</a>
+                    {% else %}
+                        <a href="{{ url_for('login') }}"> Sign In</a> ||
+                        <a href="{{ url_for('register') }}"> Register</a>
+                {% endif %}
+            </nav>
+        </div>
+
+
+        <div class="formwrapper">
+            <h2 class="title">Login</h2>
+            <form method="POST" action="/login">
+                <div class="form-field">{{ form.email.label }} {{ form.email }}
+                    {% if form.email.errors %}
+                    <ul class="errors">
+                        {% for error in form.email.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+                <div class="form-field">{{ form.password.label }} {{ form.password }}
+                    {% if form.password.errors %}
+                    <ul class="errors">
+                        {% for error in form.password.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+                {{ form.submit }}
+            </form>
+        </div>
+    </body>
+</html>

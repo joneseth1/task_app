@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Task App">
+        <title>Task App</title>
+        <!-- styles -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='new.css') }}">
+
+    </head>
+    <body>
+        
+        <div id="heading"><h1>Task App</h1></div>
+
+        <nav>
+            <a href="{{ url_for('index') }}"> Home</a> ||
+            <a href="{{ url_for('get_tasks') }}">My Tasks</a> ||
+            <a href="{{ url_for('new_task') }}">Add Task </a> ||
+            {% if user %}
+                <a href="{{ url_for('logout') }}">Logout</a>
+            {% endif %}
+        </nav>
+
+        {% if task %}
+            <form action="{{ url_for('update_task', task_id=task.id)}}" method="post">
+        {% else %}
+            <form action="new" method="post">
+        {% endif %}
+    
+    
+    
+            <p> <label>Title: </label></p>
+            <p> <input placeholder="Enter Task Name" class="titletext" type="text" name="title" value="{% if task %}{{task.title}} {% endif %}"/></p>
+            
+            <p> <label>Task Deadline: </label></p>
+            <p> <input type="date" name="taskEndDate"></p>
+
+            <p> <label>Task Notes: </label></p>
+            <p> <textarea class="textarea" name="taskText"  rows="7" cols="40" >
+            
+                {% if task %}
+                    {{task.text}}
+                {% else %} 
+                    
+                {% endif %}  
+                
+                </textarea>
+            </p>
+
+            <p> <label>Task Members: </label></p>
+            <p> <textarea place holder="Enter taks members names" class="textarea" name="taskMembers"  rows="7" cols="40">
+            
+                {% if task %}
+                    {{task.members}} 
+                {% else %}   
+                {% endif %}  
+                </textarea>
+            </p>
+
+            <p> <label>Task Importance: </label></p>
+            <p> <input placeholder="Please enter a value 0-10" class="titletext" type="number" max="10" min="0" name="importanceValue" value="{% if task %}{{task.importance}} {% endif %}"/></p>
+            
+            <p> <label>Task Status: </label></p>
+            <div class="custom-select">
+                <p>
+                    <select name="taskStatus">
+                        <option value="Completed"> Completed </option>
+                        <option value="Doing"> Doing </option>
+                        <option value="Started"> Started </option>
+                        <option value="Not Started"> Not Started </option> 
+                    </select>
+                </p>
+            </div>
+
+            <p>
+                {% if task %}
+                    <input class="button" type="submit" value="Update Task"/>
+                {% else %}
+                    <input class="button" type="submit" value="Add Task"/>
+                {% endif %}
+            </p>
+        </form>
+    </body>
+</html>

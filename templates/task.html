@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="UNCC Tasks App">
+        <title>Task App</title>
+        <!-- styles -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='tasks.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='new.css') }}">
+    </head>
+    <body>
+
+        <div id="heading"><h1>Task App</h1></div>
+
+        <nav>
+            <a href="{{ url_for('index') }}"> Home || </a>
+            <a href="{{ url_for('get_tasks') }}">My Tasks || </a>
+            <a href="{{ url_for('new_task') }}">Add Task || </a>
+            {% if user %}
+                <a href="{{ url_for('logout') }}">Logout</a>
+            {% endif %}
+        </nav>
+
+        
+
+        <h1 class="taskDetials">Task detials</h1>
+        <table class="tasktable">
+            <tr>
+                <th>Title</th>
+                <th>Members</th>
+                <th>Task Notes</th>
+                <th>Date Created</th> 
+                <th>Importance</th>
+                <th>Status</th>
+                <th>Task Deadline</th>
+            </tr>
+            <tr>
+                <td width='10%'>{{ task.title }}</td>
+                <td width='10%'>{{ task.members }}</td>
+                <td width='10%'>{{ task.text }}</td>
+                <td width='10%'>{{ task.date }}</td>
+                <td width='10%'>{{ task.importance }}</td>
+                <td width='10%'>{{ task.status }}</td>
+                <td width='10%'>{{ task.end_date }}</td>
+            </tr>
+        </table>
+        
+        <div class="commentwrapper">
+            {% if task.comments %}
+            {% if task.comments|length > 0 %}
+            <ul>
+            {% for comment in task.comments %}
+                <li>{{ comment.content }}</li>
+            {% endfor %}
+            </ul>
+            {% endif %}
+            {% endif %}
+        </div>
+        <form action="{{ url_for('new_comment', task_id=task.id) }}" method="post">
+            <div class="formwrapper">
+                <h2>Comment</h2>
+                    <div class="form-field">                         
+                        <br/> {{ form.comment }}
+                    </div>  
+                    {{ form.submit }}
+            </div>
+        </form>
+    </body>
+</html>
